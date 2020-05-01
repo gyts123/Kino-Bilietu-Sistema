@@ -76,3 +76,6 @@ C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Si
 C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\obj\Debug\Kino_Bilietu_Sistema.csproj.CopyComplete
 C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\obj\Debug\Kino_Bilietu_Sistema.dll
 C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\obj\Debug\Kino_Bilietu_Sistema.pdb
+C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\obj\Debug\Kino_Bilietu_Sistema.csproj.CoreCompileInputs.cache
+C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\bin\MySql.Data.dll
+C:\Users\gytsn\Desktop\Kino bilietu sistema\Kino_Bilietu_Sistema\Kino_Bilietu_Sistema\bin\MySql.Data.xml
