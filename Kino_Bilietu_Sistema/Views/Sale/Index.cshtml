@@ -1,33 +1,44 @@
-﻿<html>
-<head>
-    <script type='text/javascript'>
-        function addFields() {
-            var column = document.getElementById("column").value;
-            var row = document.getElementById("row").value;
+﻿
+@model IEnumerable<Kino_Bilietu_Sistema.Models.Sale>
 
-            var container = document.getElementById("container");
-            // Clear previous contents of the container
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-            for (i = 0; i < row; i++) {
-                for (j = 0; j < column; j++) {
-                    container.appendChild(document.createTextNode((i + 1) + " " + (j + 1)));
-                    var input = document.createElement("input");
-                    input.type = "text";
-                    input.name = i+2;
-                    container.appendChild(input); 
-                    
-                }
-                container.appendChild(document.createElement("br"));
-            }
+@{
+    ViewBag.Title = "Salės";
+}
+
+<h2>Salės</h2>
+
+<p>
+    @Html.ActionLink("Įkelti Salę", "SubCreate", "Sale", new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-striped datatable">
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>
+                @Html.DisplayNameFor(model => model.pavadinimas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.vietu_sk)
+            </th>
+            
+            <th style="width: 18%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.pavadinimas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vietu_sk)
+                </td>
+              
+            </tr>
         }
-    </script>
-</head>
-<body>
-    <input type="text" id="column" name="column" value="">Number columns: <br />
-    <input type="text" id="row" name="row" value="">Number of rows: <br />
-    <button id="filldetails" onclick="addFields()">Fill Details</button>
-    <div id="container" />
-</body>
-</html>
+    </tbody>
+
+</table>

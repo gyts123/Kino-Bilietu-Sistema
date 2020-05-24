@@ -46,7 +46,7 @@ namespace Kino_Bilietu_Sistema.Models
 
             string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"SELECT movie.id, movie.pavadinimas, movie.trukme, movie.aktoriai, movie.rezisierius, zanrai.pav, movie.aprasymas, movie.anonsas FROM movie INNER JOIN zanrai on movie.zanras = zanrai.id";
+            string sqlquery = @"SELECT filmas.id_Filmas, filmas.pavadinimas, filmas.trukme, filmas.aktoriai, filmas.rezisierius, zanrai.name, filmas.aprasymas, filmas.anonsas FROM filmas INNER JOIN zanrai on filmas.zanras = zanrai.id_Zanrai";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -58,25 +58,25 @@ namespace Kino_Bilietu_Sistema.Models
             {
                 filmai.Add(new Filmas
                 {
-                    id = Convert.ToInt32(item["id"]),
+                    id = Convert.ToInt32(item["id_Filmas"]),
                     pavadinimas = Convert.ToString(item["pavadinimas"]),
                     trukme = Convert.ToInt32(item["trukme"]),
                     aktoriai = Convert.ToString(item["aktoriai"]),
                     rezisierius = Convert.ToString(item["rezisierius"]),
-                    zanras = Convert.ToString(item["pav"]),
+                    zanras = Convert.ToString(item["name"]),
                     aprasymas = Convert.ToString(item["aprasymas"]),
                     anonsas = Convert.ToString(item["anonsas"]),
                 });
             }
-
+    
             return filmai;
         }
 
-        public bool addAuto(FilmasCreate filmasCreateViewModel)
+        public bool addMovie(FilmasCreate filmasCreateViewModel)
         {
             string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"INSERT INTO `movie`
+            string sqlquery = @"INSERT INTO `filmas`
                                     (
                                     `pavadinimas`,
                                     `trukme`,

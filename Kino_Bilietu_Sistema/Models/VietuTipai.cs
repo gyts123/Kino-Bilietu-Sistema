@@ -8,18 +8,18 @@ using MySql.Data.MySqlClient;
 
 namespace Kino_Bilietu_Sistema.Models
 {
-    public class Zanras
+    public class VietuTipai
     {
         public int id { get; set; }
         public string pav { get; set; }
 
-        public List<Zanras> getZanras()
+        public List<Zanras> getVietuTipas()
         {
-            List<Zanras> zanrai = new List<Zanras>();
+            List<Zanras> vietuTipai = new List<Zanras>();
 
             string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"SELECT id_Zanrai, name FROM zanrai";
+            string sqlquery = @"SELECT id_Vietu_tipai, name FROM vietu_tipai";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -29,14 +29,14 @@ namespace Kino_Bilietu_Sistema.Models
 
             foreach (DataRow item in dt.Rows)
             {
-                zanrai.Add(new Zanras
+                vietuTipai.Add(new Zanras
                 {
-                    id = Convert.ToInt32(item["id_Zanrai"]),
+                    id = Convert.ToInt32(item["id_Vietu_tipai"]),
                     pav = Convert.ToString(item["name"])
                 });
             }
 
-            return zanrai;
+            return vietuTipai;
         }
     }
 }

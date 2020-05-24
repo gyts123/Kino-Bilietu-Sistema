@@ -33,7 +33,7 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             try
             {
                 //Pridedamas naujas automobilis
-                filmaiRepo.addAuto(collection);
+                filmaiRepo.addMovie(collection);
 
                 //Nukreipia i sąrašą
                 return RedirectToAction("Index");
