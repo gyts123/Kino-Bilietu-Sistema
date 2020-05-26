@@ -23,6 +23,9 @@ namespace Kino_Bilietu_Sistema.Views.Sale
         [DisplayName("Viet. Nr")]
         [Required]
         public int[] vietos_nr { get; set; }
+        [DisplayName("Viet. Nr")]
+        [Required]
+        public int[] kaina { get; set; }
         [DisplayName("Viet tipas")]
         [Required]
         public int[] vietos_tipas { get; set; }

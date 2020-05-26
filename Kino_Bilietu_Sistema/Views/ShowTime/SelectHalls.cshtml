@@ -1,0 +1,23 @@
+﻿@model Kino_Bilietu_Sistema.Views.ShowTime.ShowTimeCreate
+<html>
+<head>
+</head>
+<body>
+    <h2>Įveskite reikiamus duomenis</h2>
+    <form method="get" action="@Url.Action("EditShowTime", "ShowTime")">
+        <div class="form-group">
+            @Html.LabelFor(model => model.fk_Kino_saleid_Kino_sale, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.ZanraiList, new { htmlAttributes = new { @class = "form-control" } })*@
+
+                @Html.DropDownListFor(model => model.fk_Kino_saleid_Kino_sale, Model.Sale_List, "--------------", new { @class = "form-control" })
+                @Html.HiddenFor(m => m.fk_Kino_saleid_Kino_sale, new { @id = "sale", @name = "sale" })
+                @Html.ValidationMessageFor(model => model.fk_Kino_saleid_Kino_sale, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+        <b>Data nuo kurios rodyti sąrašą:</b> <input type="date" id="data" name="data" required>
+        <input type="submit" value="Submit" class="submit" />
+    </form>
+</body>
+</html>

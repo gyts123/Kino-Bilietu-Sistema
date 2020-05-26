@@ -24,17 +24,21 @@ namespace Kino_Bilietu_Sistema.Models
                                         `eiles_nr`,
                                         `vietos_nr`,
                                         `vietos_tipas`,
+                                        `kaina`,
                                         `fk_Kino_saleid_Kino_sale`) 
                                         VALUES (
                                         ?eil,
                                         ?vt,
                                         ?tipas,
+                                        ?kaina,
                                         ?salesId)";
                 MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
                 mySqlCommand.Parameters.Add("?eil", MySqlDbType.Int32).Value = saleCreateViewModel.eiles_nr[i];
                 mySqlCommand.Parameters.Add("?vt", MySqlDbType.Int32).Value = saleCreateViewModel.vietos_nr[i];
                 mySqlCommand.Parameters.Add("?tipas", MySqlDbType.Int32).Value = saleCreateViewModel.vietos_tipas[i];
+                mySqlCommand.Parameters.Add("?kaina", MySqlDbType.Float).Value = saleCreateViewModel.kaina[i];
                 mySqlCommand.Parameters.Add("?salesId", MySqlDbType.Int32).Value = SaleId;
+                
                 mySqlConnection.Open();
                 mySqlCommand.ExecuteNonQuery();
                 mySqlConnection.Close();

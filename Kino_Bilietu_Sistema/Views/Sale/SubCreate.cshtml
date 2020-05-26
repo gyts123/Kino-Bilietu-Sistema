@@ -4,7 +4,7 @@
 </head>
 <body>
     <h2>Įveskite eilių ir vietų skačių</h2>
-    <form method="get" action="https://localhost:44325/Sale/Create">
+    <form method="get" action="@Url.Action("Create", "Sale")">
         <input type="text" id="column" name="column" value="">eilių skaičius: <br />
         <input type="text" id="row" name="row" value="">vietų skaičius: <br />
         <input type="submit" value="Submit" class="submit" />

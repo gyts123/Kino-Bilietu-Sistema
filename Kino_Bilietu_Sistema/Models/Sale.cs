@@ -71,7 +71,7 @@ namespace Kino_Bilietu_Sistema.Models
 
             string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
             MySqlConnection mySqlConnection = new MySqlConnection(conn);
-            string sqlquery = @"SELECT pavadinimas, COUNT(vieta.id_Vieta) as vietu_sk FROM `kino_sale` INNER JOIN `vieta` ON kino_sale.id_Kino_sale = vieta.fk_Kino_saleid_Kino_sale GROUP BY kino_sale.pavadinimas";
+            string sqlquery = @"SELECT id_Kino_sale, pavadinimas, COUNT(vieta.id_Vieta) as vietu_sk FROM `kino_sale` INNER JOIN `vieta` ON kino_sale.id_Kino_sale = vieta.fk_Kino_saleid_Kino_sale GROUP BY kino_sale.pavadinimas";
             MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
             mySqlConnection.Open();
             MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
@@ -83,6 +83,7 @@ namespace Kino_Bilietu_Sistema.Models
             {
                 sales.Add(new Sale
                 {
+                    id = Convert.ToInt32(item["id_Kino_sale"]),
                     pavadinimas = Convert.ToString(item["pavadinimas"]),
                     vietu_sk = Convert.ToInt32(item["vietu_sk"])
                 });
