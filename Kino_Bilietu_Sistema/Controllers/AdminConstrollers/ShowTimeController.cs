@@ -16,6 +16,26 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
         Sale saleRepo = new Sale();
         RodymoLaikas showTimeRepo = new RodymoLaikas();
 
+
+        public ActionResult Index()
+        {
+            ShowTimeCreate ShowTimeCreateViewModel = new ShowTimeCreate();
+            //Užpildomi pasirinkimų sąrašai duomenimis iš duomenų saugyklų
+            PopulateSelections(ShowTimeCreateViewModel);
+            return View(ShowTimeCreateViewModel);
+
+        }
+
+        public ActionResult RepertoryPage()
+        {
+            ShowTimeCreate ShowTimeCreateViewModel = new ShowTimeCreate();
+            //Užpildomi pasirinkimų sąrašai duomenimis iš duomenų saugyklų
+            PopulateSelections(ShowTimeCreateViewModel);
+            ViewBag.MyList = ShowTimeCreateViewModel.Filmo_Prad_List;
+            ModelState.Clear();
+            return View(showTimeRepo.SelectRepertory());
+        }
+
         // GET: Repertory
         public ActionResult SelectHalls()
         {

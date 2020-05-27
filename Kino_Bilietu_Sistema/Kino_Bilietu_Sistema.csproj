@@ -187,6 +187,8 @@
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\ShowTime\EditShowTime.cshtml" />
     <Content Include="Views\ShowTime\SelectHalls.cshtml" />
+    <Content Include="Views\ShowTime\Index.cshtml" />
+    <Content Include="Views\ShowTime\RepertoryPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

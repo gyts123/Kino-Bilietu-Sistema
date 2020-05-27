@@ -19,14 +19,15 @@ namespace Kino_Bilietu_Sistema.Models
         public int id { get; set; }
         [DisplayName("Pavadinimas")]
 
-        public string laikas { get; set; }
+        public DateTime laikas { get; set; }
         [DisplayName("Filmas")]
 
         public string filmas { get; set; }
 
+        public int filmas_id { get; set; }
         [DisplayName("Kina sale")]
 
-        public string kinoSale { get; set; }
+        public int kinoSale_id { get; set; }
         [DisplayName("Filmo prad laikas")]
 
         public int filmo_prad_laik { get; set; }
@@ -61,6 +62,35 @@ namespace Kino_Bilietu_Sistema.Models
                 }
             }
             return true;
+        }
+        public List<RodymoLaikas> SelectRepertory()
+        {
+            List<RodymoLaikas> rodymolaikai = new List<RodymoLaikas>();
+
+            string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = @"SELECT rodymo_laikas.laikas, rodymo_laikas.id_Rodymo_laikas, rodymo_laikas.fk_Filmasid_Filmas, rodymo_laikas.fk_Kino_saleid_Kino_sale, rodymo_laikas.filmo_prad_laik, filmas.pavadinimas FROM `rodymo_laikas` INNER JOIN `filmas` on filmas.id_Filmas = rodymo_laikas.fk_Filmasid_Filmas";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlConnection.Open();
+            MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+            DataTable dt = new DataTable();
+            mda.Fill(dt);
+            mySqlConnection.Close();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                rodymolaikai.Add(new RodymoLaikas
+                {
+                    laikas = Convert.ToDateTime(item["laikas"]),
+                    id = Convert.ToInt32(item["id_Rodymo_laikas"]),
+                    filmas_id = Convert.ToInt32(item["fk_Filmasid_Filmas"]),
+                    kinoSale_id = Convert.ToInt32(item["fk_Kino_saleid_Kino_sale"]),
+                    filmo_prad_laik = Convert.ToInt32(item["filmo_prad_laik"]),
+                    filmas = Convert.ToString(item["pavadinimas"]),
+                });
+            }
+
+            return rodymolaikai;
         }
     }
 }

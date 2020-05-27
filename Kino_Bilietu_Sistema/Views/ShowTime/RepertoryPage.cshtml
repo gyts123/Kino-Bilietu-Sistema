@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Kino_Bilietu_Sistema.Models.RodymoLaikas>
+<head>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+    @{ 
+        var data = Request["data"];
+        var sale = Request["fk_Kino_saleid_Kino_sale"];
+    }
+    <table>
+        @{
+            List<string> times = new List<string>();
+            foreach (SelectListItem item in ViewBag.MyList)
+            {
+                times.Add(item.Text);
+            }
+
+            DateTime theDate = DateTime.Parse(data);
+
+            int days = 7;
+
+
+            for (int i = 0; i < ViewBag.MyList.Count + 1; i++)
+            {
+
+
+                if (i == 0)
+                {
+                    <tr>
+                        <th>Laikas</th>
+                        @{
+                            for (int g = 0; g < days; g++)
+                            {
+                                DateTime dat = theDate.AddDays(g);
+                                string theDateWithoutTime = dat.ToString("yyyy-MM-dd");
+
+                                <th>@theDateWithoutTime</th>
+                            }
+                        }
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td>@times[i - 1]</td>
+                        @{
+                            for (int g = 0; g < days; g++)
+                            {
+                                bool found = false;
+
+                                DateTime dat = theDate.AddDays(g);
+                                foreach (var item in Model)
+                                {
+                                    string kinoSale = item.kinoSale_id.ToString() + ",";
+                                    if (kinoSale == sale && item.laikas == dat && item.filmo_prad_laik == i)
+                                    {
+                                        <td>@Html.DisplayFor(modelItem => item.filmas)</td>
+                                        found = true;
+                                    }
+                                }
+
+                                if (!found)
+                                {
+                                    <td> </td>
+                                }
+
+                            }
+                        }
+                    </tr>
+                    }
+                }
+
+
+        }
+    </table>
+
+</body>

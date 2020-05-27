@@ -1,5 +1,4 @@
 ﻿@model Kino_Bilietu_Sistema.Views.ShowTime.ShowTimeCreate
-
 <head>
     <style>
         table {
@@ -71,7 +70,7 @@
 
                                     <td>@Html.DropDownListFor(model => model.fk_Filmasid_Filmas, Model.Filmai_List, "Pasirinkti Filma", new { @class = "form-control" })</td>
                                     @Html.HiddenFor(model => model.laikas, new { @Value = theDateWithoutTime })
-                                    @Html.HiddenFor(model => model.filmo_prad_laik, new { @Value = i - 1 })
+                                    @Html.HiddenFor(model => model.filmo_prad_laik, new { @Value = i})
                                 }
                             }
                         </tr>
