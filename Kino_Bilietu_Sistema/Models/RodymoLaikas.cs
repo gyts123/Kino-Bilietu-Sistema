@@ -32,6 +32,70 @@ namespace Kino_Bilietu_Sistema.Models
 
         public int filmo_prad_laik { get; set; }
 
+        public bool insertAndUpdate(ShowTimeCreate ShowTimeViewModel)
+        {
+            List<RodymoLaikas> items = SelectRepertory();
+            for (int i = 0; i < ShowTimeViewModel.fk_Filmasid_Filmas.Length; i++) {
+                bool notInsert = false;
+                for (int j = 0; j < items.Count-1; j++)
+                {
+                    string data = items[j].laikas.ToString("yyyy-MM-dd");
+                    if (ShowTimeViewModel.filmo_prad_laik[i] == items[j].filmo_prad_laik &&
+                        ShowTimeViewModel.laikas[i] == data &&
+                        ShowTimeViewModel.fk_Kino_saleid_Kino_sale[0] == items[j].kinoSale_id &&
+                        ShowTimeViewModel.fk_Filmasid_Filmas[i] != 0)
+                    {
+                        string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+                        MySqlConnection mySqlConnection = new MySqlConnection(conn);
+                        string sqlquery = @"UPDATE `rodymo_laikas` SET `fk_Filmasid_Filmas` = ?fk_Filmasid_Filmas WHERE laikas=?laikas AND fk_Kino_saleid_Kino_sale= ?fk_Kino_saleid_Kino_sale AND filmo_prad_laik = ?filmo_prad_laik";
+                        MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+                        mySqlCommand.Parameters.Add("?laikas", MySqlDbType.Date).Value = ShowTimeViewModel.laikas[i];
+                        mySqlCommand.Parameters.Add("?fk_Filmasid_Filmas", MySqlDbType.Int32).Value = ShowTimeViewModel.fk_Filmasid_Filmas[i];
+                        mySqlCommand.Parameters.Add("?fk_Kino_saleid_Kino_sale", MySqlDbType.Int32).Value = ShowTimeViewModel.fk_Kino_saleid_Kino_sale[0];
+                        mySqlCommand.Parameters.Add("?filmo_prad_laik", MySqlDbType.Int32).Value = ShowTimeViewModel.filmo_prad_laik[i];
+                        mySqlConnection.Open();
+                        mySqlCommand.ExecuteNonQuery();
+                        mySqlConnection.Close();
+
+                        notInsert = true;
+                    }
+
+                }
+                if (!notInsert)
+                {
+                    if (ShowTimeViewModel.fk_Filmasid_Filmas[i] != 0)
+                    {
+
+                        string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+                        MySqlConnection mySqlConnection = new MySqlConnection(conn);
+                        string sqlquery = @"INSERT INTO `rodymo_laikas`
+                                    (
+                                    `laikas`,
+                                    `fk_Filmasid_Filmas`,
+                                    `fk_Kino_saleid_Kino_sale`,
+                                    `filmo_prad_laik`) 
+                                    VALUES (
+                                    ?laikas,
+                                    ?fk_Filmasid_Filmas,
+                                    ?fk_Kino_saleid_Kino_sale,
+                                    ?filmo_prad_laik)";
+                        MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+                        mySqlCommand.Parameters.Add("?laikas", MySqlDbType.Date).Value = ShowTimeViewModel.laikas[i];
+                        mySqlCommand.Parameters.Add("?fk_Filmasid_Filmas", MySqlDbType.Int32).Value = ShowTimeViewModel.fk_Filmasid_Filmas[i];
+                        mySqlCommand.Parameters.Add("?fk_Kino_saleid_Kino_sale", MySqlDbType.Int32).Value = ShowTimeViewModel.fk_Kino_saleid_Kino_sale[0];
+                        mySqlCommand.Parameters.Add("?filmo_prad_laik", MySqlDbType.Int32).Value = ShowTimeViewModel.filmo_prad_laik[i];
+                        mySqlConnection.Open();
+                        mySqlCommand.ExecuteNonQuery();
+                        mySqlConnection.Close();
+                    }
+                }
+            }
+            return true;
+        }
+        public bool Update(ShowTimeCreate ShowTimeViewModel)
+        {
+            return true;
+        }
         public bool Insert(ShowTimeCreate ShowTimeViewModel)
         {
             for (int i = 0; i < ShowTimeViewModel.fk_Filmasid_Filmas.Length; i++)

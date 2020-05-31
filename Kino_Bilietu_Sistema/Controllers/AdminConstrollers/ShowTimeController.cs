@@ -60,7 +60,7 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             try
             {
                 //Pridedamas naujas automobilis
-                showTimeRepo.Insert(collection);
+                showTimeRepo.insertAndUpdate(collection);
                 return RedirectToAction("SelectHalls");
             }
             catch
@@ -68,6 +68,7 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
                 PopulateSelections(collection);
                 return View(collection);
             }
+
         }
 
         public void PopulateSelections(ShowTimeCreate SaleCreateViewModel)

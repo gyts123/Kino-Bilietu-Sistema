@@ -26,6 +26,9 @@ namespace Kino_Bilietu_Sistema.Views.ShowTime
         [Required]
         public int[] filmo_prad_laik { get; set; }
 
+        [Required]
+        public bool confirmation { get; set; }
+
         public IList<SelectListItem> Filmai_List { get; set; }
         public IList<SelectListItem> Sale_List { get; set; }
         public IList<SelectListItem> Filmo_Prad_List { get; set; }

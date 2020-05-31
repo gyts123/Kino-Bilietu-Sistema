@@ -21,7 +21,7 @@
 <body>
     @using (Html.BeginForm())
     {
-
+        <p style="color:red;text-align:center"><b>Dėmesio! atlikti pakeitimai perrašys jau esamus duomenis !!!</b></p>
         Html.AntiForgeryToken();
 
         var data = Request["data"];
@@ -70,7 +70,7 @@
 
                                     <td>@Html.DropDownListFor(model => model.fk_Filmasid_Filmas, Model.Filmai_List, "Pasirinkti Filma", new { @class = "form-control" })</td>
                                     @Html.HiddenFor(model => model.laikas, new { @Value = theDateWithoutTime })
-                                    @Html.HiddenFor(model => model.filmo_prad_laik, new { @Value = i})
+                                    @Html.HiddenFor(model => model.filmo_prad_laik, new { @Value = i })
                                 }
                             }
                         </tr>
@@ -80,6 +80,7 @@
 
             }
         </table>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Išsaugoti" class="btn btn-success" />
