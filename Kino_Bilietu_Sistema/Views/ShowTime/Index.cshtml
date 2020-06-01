@@ -14,7 +14,7 @@
                 @Html.HiddenFor(m => m.fk_Kino_saleid_Kino_sale, new { @id = "sale", @name = "sale" })
                 @Html.ValidationMessageFor(model => model.fk_Kino_saleid_Kino_sale, "", new { @class = "text-danger" })
             </div>
-            
+
         </div>
         <b>Data nuo kurios rodyti sąrašą:</b> <input type="date" id="data" name="data" required>
         <input type="submit" value="Submit" class="submit" />

@@ -25,7 +25,7 @@ namespace Kino_Bilietu_Sistema.Models
         public string filmas { get; set; }
 
         public int filmas_id { get; set; }
-        [DisplayName("Kina sale")]
+        [DisplayName("Kino sale")]
 
         public int kinoSale_id { get; set; }
         [DisplayName("Filmo prad laikas")]

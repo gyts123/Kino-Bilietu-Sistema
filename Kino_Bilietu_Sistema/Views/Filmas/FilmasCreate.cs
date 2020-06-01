@@ -37,5 +37,6 @@ namespace Kino_Bilietu_Sistema.Views.Filmas
         public string anonsas { get; set; }
 
         public IList<SelectListItem> ZanraiList { get; set; }
+
     }
 }

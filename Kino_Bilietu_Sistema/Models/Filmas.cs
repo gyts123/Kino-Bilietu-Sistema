@@ -68,7 +68,6 @@ namespace Kino_Bilietu_Sistema.Models
                     anonsas = Convert.ToString(item["anonsas"]),
                 });
             }
-    
             return filmai;
         }
 
@@ -107,8 +106,68 @@ namespace Kino_Bilietu_Sistema.Models
 
             return true;
         }
+        public List<Filmas> GetHistory()
+        {
+            List<Filmas> filmai = new List<Filmas>();
+
+            string conn = ConfigurationManager.ConnectionStrings["MysqlConnection"].ConnectionString;
+            MySqlConnection mySqlConnection = new MySqlConnection(conn);
+            string sqlquery = @"SELECT filmas.id_Filmas, filmas.pavadinimas, filmas.trukme, filmas.aktoriai, filmas.rezisierius, zanrai.name, filmas.aprasymas, filmas.anonsas FROM filmas INNER JOIN zanrai on filmas.zanras = zanrai.id_Zanrai WHERE id_Filmas IN (SELECT rodymo_laikas.fk_Filmasid_Filmas FROM bilietas INNER JOIN rodymo_laikas ON bilietas.fk_Rodymo_laikasid_Rodymo_laikas = rodymo_laikas.id_Rodymo_laikas)";
+            MySqlCommand mySqlCommand = new MySqlCommand(sqlquery, mySqlConnection);
+            mySqlConnection.Open();
+            MySqlDataAdapter mda = new MySqlDataAdapter(mySqlCommand);
+            DataTable dt = new DataTable();
+            mda.Fill(dt);
+            mySqlConnection.Close();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                filmai.Add(new Filmas
+                {
+                    id = Convert.ToInt32(item["id_Filmas"]),
+                    pavadinimas = Convert.ToString(item["pavadinimas"]),
+                    trukme = Convert.ToInt32(item["trukme"]),
+                    aktoriai = Convert.ToString(item["aktoriai"]),
+                    rezisierius = Convert.ToString(item["rezisierius"]),
+                    zanras = Convert.ToString(item["name"]),
+                    aprasymas = Convert.ToString(item["aprasymas"]),
+                    anonsas = Convert.ToString(item["anonsas"]),
+                });
+            }
+
+            return filmai;
+        }
+        public List<Filmas> GetActorsAndGenres()
+        {
+            List<Filmas> filtruoti = GetHistory();
+            List<Filmas> filmai = getMovie();
+            List<Filmas> aktoriai = new List<Filmas>();
+
+            if (filtruoti.Count == 0)
+            {
+                for (int k = 0; k < filmai.Count; k++)
+                {
+                    if (aktoriai.Count >= 10)
+                    {
+                        aktoriai.Add(filmai[k]);
+                    }
+                }
+                return aktoriai;
+            }
+            else
+            {
+                for (int i = 0; i < filtruoti.Count; i++)
+                {
+                    for (int j = 0; j < filmai.Count; j++)
+                    {
+                        if ((filtruoti[i].aktoriai == filmai[j].aktoriai || filtruoti[i].zanras == filmai[j].zanras)&& !aktoriai.Contains(filmai[j]) && aktoriai.Count <= 10)
+                        {
+                            aktoriai.Add(filmai[j]);
+                        }
+                    }
+                }
+                return aktoriai;
+            }
+        }
     }
-
-    
-
 }

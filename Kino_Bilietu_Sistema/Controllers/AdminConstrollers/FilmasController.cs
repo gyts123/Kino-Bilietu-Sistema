@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Kino_Bilietu_Sistema.Models;
 using Kino_Bilietu_Sistema.Views.Filmas;
+using Kino_Bilietu_Sistema.Views.ShowTime;
 
 namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
 {
@@ -50,7 +52,6 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             var zanrai = zanraiRepo.getZanras();
 
             List<SelectListItem> selectListZanrai = new List<SelectListItem>();
-   
             //užpildomas kebulų sąrašas iš duomenų bazės
             foreach (var item in zanrai)
             {
@@ -60,5 +61,11 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             //Sarašai priskiriami vaizdo objektui
             filmasCreateViewModel.ZanraiList = selectListZanrai;
         }
+        public ActionResult RecommendedMovieList()
+        {
+            ModelState.Clear();
+            return View(filmaiRepo.GetActorsAndGenres());
+        }
+
     }
 }
