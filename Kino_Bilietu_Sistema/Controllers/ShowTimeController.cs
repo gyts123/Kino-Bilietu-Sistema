@@ -11,6 +11,8 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
 {
     public class ShowTimeController : Controller
     {
+        Bilietas bilietasRepo = new Bilietas();
+        Vieta vietaRepo = new Vieta();
         FilmoPradlaikai filmuPradLaikRepo = new FilmoPradlaikai();
         Filmas filmRepo = new Filmas();
         Sale saleRepo = new Sale();
@@ -52,6 +54,16 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             //Užpildomi pasirinkimų sąrašai duomenimis iš duomenų saugyklų
             PopulateSelections(ShowTimeCreateViewModel);
             return View(ShowTimeCreateViewModel);
+        }
+        public ActionResult TicketBuyPage()
+        {
+            return View();
+        }
+
+        public ActionResult RecommendedMovieList()
+        {
+            ModelState.Clear();
+            return View(filmRepo.GetActorsAndGenres());
         }
 
         [HttpPost]
@@ -100,6 +112,31 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             SaleCreateViewModel.Filmo_Prad_List = selectListFilmuPradLaik;
             SaleCreateViewModel.Sale_List = selectListSales;
             SaleCreateViewModel.Filmai_List = selectListFilmai;
+        }
+        public int CountAvailableSeats(int salesid, DateTime time, string start)
+        {
+           List<Vieta> vietos = vietaRepo.getVieta();
+           List<Bilietas> bilietai =  bilietasRepo.getBilietas();
+            int countall = 0;
+            int countfew = 0;
+
+
+            for (int i = 0; i < vietos.Count; i++)
+            {
+                if(vietos[i].salespavadinimas == salesid)
+                {
+                    countall++;
+                }
+            }
+            for (int i = 0; i < bilietai.Count; i++)
+            {
+                if (bilietai[i].salesid == salesid && bilietai[i].filmopradlaikas == start && bilietai[i].Rodymo_laikas_id_rodymo_laikas == time)
+                {
+                    countfew++;
+                }
+            }
+            return countall - countfew;
+
         }
     }
 }

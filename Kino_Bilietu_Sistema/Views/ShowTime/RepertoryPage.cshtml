@@ -43,47 +43,50 @@
 
                 if (i == 0)
                 {
-                    <tr>
-                        <th>Laikas</th>
-                        @{
-                            for (int g = 0; g < days; g++)
-                            {
-                                DateTime dat = theDate.AddDays(g);
-                                string theDateWithoutTime = dat.ToString("yyyy-MM-dd");
+                <tr>
+                    <th>Laikas</th>
+                    @{
+                        for (int g = 0; g < days; g++)
+                        {
+                            DateTime dat = theDate.AddDays(g);
+                            string theDateWithoutTime = dat.ToString("yyyy-MM-dd");
 
-                                <th>@theDateWithoutTime</th>
-                            }
+                            <th>@theDateWithoutTime</th>
                         }
-                    </tr>
+                    }
+                </tr>
                 }
                 else
                 {
-                    <tr>
-                        <td>@times[i - 1]</td>
-                        @{
-                            for (int g = 0; g < days; g++)
-                            {
-                                bool found = false;
+    <tr>
+        <td>@times[i - 1]</td>
+        @{
+            for (int g = 0; g < days; g++)
+            {
+                bool found = false;
 
-                                DateTime dat = theDate.AddDays(g);
-                                foreach (var item in Model)
-                                {
-                                    string kinoSale = item.kinoSale_id.ToString() + ",";
-                                    if (kinoSale == sale && item.laikas == dat && item.filmo_prad_laik == i)
-                                    {
-                                        <td>@Html.DisplayFor(modelItem => item.filmas)</td>
-                                        found = true;
-                                    }
-                                }
+                DateTime dat = theDate.AddDays(g);
+                foreach (var item in Model)
+                {
+                    string kinoSale = item.kinoSale_id.ToString() + ",";
+                    if (kinoSale == sale && item.laikas == dat && item.filmo_prad_laik == i)
+                    {
+                        <td>@Html.DisplayFor(modelItem => item.filmas) 
+                            @Html.ActionLink("Pirkti", "TicketBuyPage", "ShowTime", new { @class = "btn btn-success" }) </td>
 
-                                if (!found)
-                                {
-                                    <td> </td>
-                                }
+                        found = true;
 
-                            }
-                        }
-                    </tr>
+                    }
+                }
+
+                if (!found)
+                {
+                    <td> </td>
+                }
+
+            }
+        }
+    </tr>
                     }
                 }
 

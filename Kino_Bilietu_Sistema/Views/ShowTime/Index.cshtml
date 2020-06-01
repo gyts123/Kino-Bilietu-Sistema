@@ -3,6 +3,9 @@
 <head>
 </head>
 <body>
+    <p>
+        @Html.ActionLink("Rekomenduojamas filmų sąrašas", "RecommendedMovieList", "ShowTime", new { @class = "btn btn-success" })
+    </p>
     <h2>Įveskite reikiamus duomenis</h2>
     <form method="get" action="@Url.Action("RepertoryPage", "ShowTime")">
         <div class="form-group">

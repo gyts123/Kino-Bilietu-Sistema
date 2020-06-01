@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "TicketBuyPage";
+}
+
+<h2>Bilietai</h2>
+<body>
+    <h2>Įveskite reikiamus duomenis</h2>
+    <form method="get" action="@Url.Action("RepertoryPage", "ShowTime")">
+        <div class="form-group">
+            <div class="col-md-10">
+
+                @Html.DropDownListFor(model => model., Model.Sale_List, "--------------", new { @class = "form-control" })
+            </div>
+
+        </div>
+        <b>Data nuo kurios rodyti sąrašą:</b> <input type="date" id="data" name="data" required>
+        <input type="submit" value="Submit" class="submit" />
+    </form>
+</body>
+

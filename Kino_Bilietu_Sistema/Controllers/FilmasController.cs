@@ -61,11 +61,6 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             //Sarašai priskiriami vaizdo objektui
             filmasCreateViewModel.ZanraiList = selectListZanrai;
         }
-        public ActionResult RecommendedMovieList()
-        {
-            ModelState.Clear();
-            return View(filmaiRepo.GetActorsAndGenres());
-        }
 
     }
 }

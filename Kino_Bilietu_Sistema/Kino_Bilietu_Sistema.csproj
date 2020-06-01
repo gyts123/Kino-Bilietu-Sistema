@@ -123,9 +123,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\AdminConstrollers\FilmasController.cs" />
-    <Compile Include="Controllers\AdminConstrollers\ShowTimeController.cs" />
-    <Compile Include="Controllers\AdminConstrollers\SaleController.cs" />
+    <Compile Include="Controllers\FilmasController.cs" />
+    <Compile Include="Controllers\ShowTimeController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,6 +135,7 @@
     <Compile Include="Models\FilmoPradlaikai.cs" />
     <Compile Include="Models\RodymoLaikas.cs" />
     <Compile Include="Models\Sale.cs" />
+    <Compile Include="Models\Saskaita.cs" />
     <Compile Include="Models\Vieta.cs" />
     <Compile Include="Models\VietuTipai.cs" />
     <Compile Include="Models\Bilietas.cs" />
@@ -191,12 +192,13 @@
     <Content Include="Views\ShowTime\SelectHalls.cshtml" />
     <Content Include="Views\ShowTime\Index.cshtml" />
     <Content Include="Views\ShowTime\RepertoryPage.cshtml" />
-    <Content Include="Views\Filmas\RecommendedMovieList.cshtml" />
     <Content Include="Views\ShowTime\RecommendedMovieList.cshtml" />
+    <Content Include="Views\ShowTime\TicketBuyPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\UserControllers\" />
+    <Folder Include="Views\Saskaita\" />
+    <Folder Include="Views\Ticket\" />
     <Folder Include="Views\UserViews\" />
   </ItemGroup>
   <ItemGroup>
