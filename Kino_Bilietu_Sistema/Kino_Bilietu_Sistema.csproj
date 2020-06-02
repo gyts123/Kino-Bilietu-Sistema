@@ -192,7 +192,7 @@
     <Content Include="Views\ShowTime\SelectHalls.cshtml" />
     <Content Include="Views\ShowTime\Index.cshtml" />
     <Content Include="Views\ShowTime\RepertoryPage.cshtml" />
-    <Content Include="Views\ShowTime\RecommendedMovieList.cshtml" />
+    <Content Include="Views\Filmas\RecommendedMovieList.cshtml" />
     <Content Include="Views\ShowTime\TicketBuyPage.cshtml" />
   </ItemGroup>
   <ItemGroup>

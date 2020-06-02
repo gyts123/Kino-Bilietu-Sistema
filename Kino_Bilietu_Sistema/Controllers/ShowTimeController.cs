@@ -63,7 +63,7 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
         public ActionResult RecommendedMovieList()
         {
             ModelState.Clear();
-            return View(filmRepo.GetActorsAndGenres());
+            return RedirectToAction("RecommendedMovieList", "Filmas");
         }
 
         [HttpPost]
@@ -137,6 +137,10 @@ namespace Kino_Bilietu_Sistema.Controllers.AdminConstrollers
             }
             return countall - countfew;
 
+        }
+        public void BuyTicket()
+        {
+           
         }
     }
 }
