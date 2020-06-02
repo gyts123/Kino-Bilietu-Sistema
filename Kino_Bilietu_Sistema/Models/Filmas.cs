@@ -147,7 +147,7 @@ namespace Kino_Bilietu_Sistema.Models
             {
                 for (int k = 0; k < filmai.Count; k++)
                 {
-                    if (aktoriai.Count >= 10)
+                    if (aktoriai.Count <= 10)
                     {
                         aktoriai.Add(filmai[k]);
                     }
